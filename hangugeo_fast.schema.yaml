@@ -1,0 +1,153 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: hangugeo_fast
+  name: 韓國語-羅馬字快速
+  version: "2020.06.23"
+  author:
+    - Li GhauNgyan
+  description: |
+    鍵盤排列
+    Qㅑ /Wㅕ /Eㅔㅖ/Rㄹ /Tㅌ /Yㅠ /Uㅜ /Iㅣ /Oㅗ /Pㅍ
+      Aㅏ /Sㅅㅆ/Dㄷㄸ/Fㅇ /Gㄱㄲ/Hㅎ /Jㅡ /Kㅋ /Lㅛ
+       Zㅈㅉ/Xㅐㅒ/Cㅊ /Vㅓ /Bㅂㅃ/Nㄴ /Mㅁ
+     主要根據羅馬音排列, 空餘的鍵位就近安排常用雙元音
+  dependencies:
+    - luna_pinyin
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 韓文, 西文 ]
+  - name: half_shape
+    states: [ 全角, 半角 ]
+  - name: simplification
+    states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    reset: 1
+    states: [  。，, ．，]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - reverse_lookup_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: 'zyxwvutsrqponmlkjihgfedcbaZXVUSOGEDBA'
+  delimiter: "'"
+  algebra:
+    - xform/wo/weo/
+    - xform/ae/x/
+    - xform/eu/j/
+    - xform/eo/v/
+    - xform/ng/f/
+    - xform/w([ax])/o$1/
+    - xform/w([ve])/u$1/
+    - xform/oe/oi/
+    - xform/ui/ji/
+    - xform/wi/ui/
+    - xform/(^[aeouxvijqwy])/f$1/
+    - xform/y([aeouxv])/\U$1/
+    - xform/ss/S/
+    - xform/zz/Z/
+    - xform/bb/B/
+    - xform/dd/D/
+    - xform/gg/G/
+    - xform/l/r/
+    - xlit|zxvutsponmrkjihgfedcbaZXVUSOGEDBA|zxvutsponmrkjihgfedcbaZXwySlGEDBq|
+    - abbrev/^([a-zA-Z]).+$/$1/
+
+translator:
+  dictionary: hangugeo
+  prism: hangugeo_fast
+  spelling_hints: 8
+  comment_format:
+    - xform/wo/weo/
+    - xform/ae/x/
+    - xform/eu/j/
+    - xform/eo/v/
+    - xform/ng/f/
+    - xform/w([ax])/o$1/
+    - xform/w([ve])/u$1/
+    - xform/oe/oi/
+    - xform/ui/ji/
+    - xform/wi/ui/
+    - xform/(^[aeouxvijqwy])/f$1/
+    - xform/y([aeouxv])/\U$1/
+    - xform/ss/S/
+    - xform/zz/Z/
+    - xform/bb/B/
+    - xform/dd/D/
+    - xform/gg/G/
+    - xform/l/r/
+    - xform/(^[aeouxvijAEOUXV])/f$1/
+    - xform/'([aeouxvijAEOUXV])/'f$1/
+    - "xlit|zxvutsponmrkjihgfedcbaZXVUSOGEDBA|ㅈㅐㅓㅜㅌㅅㅍㅗㄴㅁㄹㅋㅡㅣㅎㄱㅇㅔㄷㅊㅂㅏㅉㅒㅕㅠㅆㅛㄲㅖㄸㅃㅑ|"
+  preedit_format:
+    - "xlit|zxvutsponmrkjihgfedcbaZXwySlGEDBq|ㅈㅐㅓㅜㅌㅅㅍㅗㄴㅁㄹㅋㅡㅣㅎㄱㅇㅔㄷㅊㅂㅏㅉㅒㅕㅠㅆㅛㄲㅖㄸㅃㅑ|"
+
+reverse_lookup:
+  dictionary: luna_pinyin
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format:
+    - xform/wo/weo/
+    - xform/ae/x/
+    - xform/eu/j/
+    - xform/eo/v/
+    - xform/ng/f/
+    - xform/w([ax])/o$1/
+    - xform/w([ve])/u$1/
+    - xform/oe/oi/
+    - xform/ui/ji/
+    - xform/wi/ui/
+    - xform/(^[aeouxvijqwy])/f$1/
+    - xform/y([aeouxv])/\U$1/
+    - xform/ss/S/
+    - xform/zz/Z/
+    - xform/bb/B/
+    - xform/dd/D/
+    - xform/gg/G/
+    - xform/l/r/
+    - xform/(^[aeouxvijAEOUXV])/f$1/
+    - xform/ ([aeouxvijAEOUXV])/ f$1/
+    - "xlit|zxvutsponmrkjihgfedcbaZXVUSOGEDBA|ㅈㅐㅓㅜㅌㅅㅍㅗㄴㅁㄹㅋㅡㅣㅎㄱㅇㅔㄷㅊㅂㅏㅉㅒㅕㅠㅆㅛㄲㅖㄸㅃㅑ|"
+  
+
+punctuator:
+  import_preset: symbols
+  
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  #import_preset: default
+  patterns:
+    punct: '^/([0-9]0?|[A-Za-z]+)$'
+    reverse_lookup: "`[a-z]*'?$"
