@@ -78,7 +78,7 @@ schema_id: hangugeo_fast
   - 含-y-介音的其他元音只能大寫
   - ㄹ只能拼作r
   
-- ![](keyboard/key.png)
+![](keyboard/key.png)
 
 ### 韓國語-標準鍵盤
 
