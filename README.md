@@ -6,9 +6,9 @@
 
 漢字音來源：[MCPDict: 漢字古今中外讀音查詢](https://github.com/MaigoAkisame/MCPDict/tree/master/assets/databases/mcpdict.zip)
 
-![全拼](demo/hangugfv.png)
+![](demo/hangugfv.png)
 
-![簡拼](demo/fff.png)
+![](demo/fff.png)
 
 ## 拼音方案
 
